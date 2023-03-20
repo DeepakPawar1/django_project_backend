@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'core',
 	'core.user',
-	'rest_framework'
+    'core.auth',
+	'rest_framework',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -142,11 +144,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-],
-'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        
-],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ),
+'DEFAULT_FILTER_BACKENDS':
+       ['django_filters.rest_framework.DjangoFilterBackend'],
+
+}
+
+APPEND_SLASH=False
+
+
+SIMPLE_JWT={
+    "UPDATE_LAST_LOGIN": False
 }
