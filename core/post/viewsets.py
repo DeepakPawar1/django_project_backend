@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from core.abstract.viewsets import AbstractViewSet
 from core.post.models import Post
 from core.post.serializers import PostSerializer
-
+from rest_framework.decorators import action
+from rest_framework import status
 
 class PostViewSet(AbstractViewSet):
     
@@ -29,3 +30,21 @@ class PostViewSet(AbstractViewSet):
         self.perform_create(serializer)
         print("<><><><><><><>after creation")
         return Response(serializer.data,status=201)
+
+    @action(methods=['post'], detail=True)
+    def like(self, request, *args, **kwargs):
+        post = self.get_object()
+        user = self.request.user
+        user.like(post)
+        serializer = self.serializer_class(post)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
+
+
+    @action(methods=['post'], detail=True)
+    def remove_like(self, request, *args, **kwargs):
+        post = self.get_object()
+        user = self.request.user
+        user.remove_like(post)
+        serializer = self.serializer_class(post)
+        return Response(serializer.data,status=status.HTTP_200_OK)

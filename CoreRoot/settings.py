@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'CoreRoot.wsgi.application'
 DATABASES = {
 	'default':{
 		'ENGINE' :'django.db.backends.postgresql_psycopg2',
-		'NAME': 'coredb',
+		'NAME': 'mydb',
 		'USER': 'core',
 		'PASSWORD': 'Deepak@8180',
 		'HOST': 'localhost',
@@ -156,3 +156,7 @@ REST_FRAMEWORK = {
 
 APPEND_SLASH=False
 
+SIMPLE_JWT = {
+'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
+'REFRESH_TOKEN_LIFETIME': timedelta(days=20),
+}
