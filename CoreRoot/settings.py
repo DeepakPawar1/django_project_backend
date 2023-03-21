@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'core',
 	'core.user',
     'core.auth',
+    'core.post',
 	'rest_framework',
     'rest_framework_simplejwt'
 ]
@@ -149,12 +150,9 @@ REST_FRAMEWORK = {
         ),
 'DEFAULT_FILTER_BACKENDS':
        ['django_filters.rest_framework.DjangoFilterBackend'],
+'PAGE_SIZE': 15,
 
 }
 
 APPEND_SLASH=False
 
-
-SIMPLE_JWT={
-    "UPDATE_LAST_LOGIN": False
-}
